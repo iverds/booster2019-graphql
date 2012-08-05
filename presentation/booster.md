@@ -345,8 +345,8 @@ const resolvers = {
 [.code-highlight: all]
 ```javascript
 input HumanSearch {
-    name: String
-    hometown: String
+    first_name: String
+    last_name: String
 }
 
 type Query {
@@ -356,7 +356,7 @@ type Query {
 const resolvers = {
     Query: {
         searchHuman = (parent, args, context, info) => {
-            console.log("Search: ", args.search.name);
+            console.log("Search: ", args.search.first_name);
         }
     }
 }
@@ -402,17 +402,23 @@ type Query {
 [.code-highlight: all]
 ```javascript
 type Human {
-    name: String
-    hometown: String
+    id: ID!
+    first_name: String!
+    last_name: String!
+    age: Int!
     friends: [Human]
 }
 
 const resolvers = {
     Query: {
-        humans: (parent, args) => {...}
+        humans: (parent, args) => {
+            return [{id: 1, first_name, 'Iver', last_name: 'Skjervum-Karlsen', age: 32}]
+        }
     },
     Human: {
-        friends: (parent, args) => {...}
+        friends: (parent, args) => {
+            console.log(`Human id: ${parent.id}`)
+        }
     }
 }
 ```
@@ -648,6 +654,17 @@ const resolvers = {
     club_ids: [1, 2, 3]
 }
 ```
+
+---
+
+# Clients
+
+---
+
+# Clients
+
+- Relay Modern
+- Apollo Client
 
 ---
 
