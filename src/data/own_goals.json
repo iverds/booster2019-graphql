@@ -1,0 +1,272 @@
+[
+    {
+    "id": 1,
+    "home_team": "LEI",
+    "away_team": "WOL",
+    "against": "LEI",
+    "scorer_id": 4901,
+    "scorer_name": "Doherty",
+    "scorer_jersey_number": 2,
+    "scoring_minute": "29"
+  },
+  {
+    "id": 2,
+    "home_team": "MCI",
+    "away_team": "HUD",
+    "against": "MCI",
+    "scorer_id": 3103,
+    "scorer_name": "Kongolo",
+    "scorer_jersey_number": 5,
+    "scoring_minute": "84"
+  },
+  {
+    "id": 3,
+    "home_team": "ARS",
+    "away_team": "WHU",
+    "against": "ARS",
+    "scorer_id": 4819,
+    "scorer_name": "Diop",
+    "scorer_jersey_number": 23,
+    "scoring_minute": "70"
+  },
+  {
+    "id": 4,
+    "home_team": "NEW",
+    "away_team": "CHE",
+    "against": "CHE",
+    "scorer_id": 4521,
+    "scorer_name": "Yedlin",
+    "scorer_jersey_number": 22,
+    "scoring_minute": "87"
+  },
+  {
+    "id": 5,
+    "home_team": "WAT",
+    "away_team": "TOT",
+    "against": "TOT",
+    "scorer_id": 4715,
+    "scorer_name": "Doucouré",
+    "scorer_jersey_number": 16,
+    "scoring_minute": "53"
+  },
+  {
+    "id": 6,
+    "home_team": "LIV",
+    "away_team": "SOU",
+    "against": "LIV",
+    "scorer_id": 3206,
+    "scorer_name": "Hoedt",
+    "scorer_jersey_number": 6,
+    "scoring_minute": "10"
+  },
+  {
+    "id": 7,
+    "home_team": "WHU",
+    "away_team": "MUN",
+    "against": "WHU",
+    "scorer_id": 4402,
+    "scorer_name": "Lindelöf",
+    "scorer_jersey_number": 2,
+    "scoring_minute": "43"
+  },
+  {
+    "id": 8,
+    "home_team": "ARS",
+    "away_team": "WAT",
+    "against": "ARS",
+    "scorer_id": 4714,
+    "scorer_name": "Cathcart",
+    "scorer_jersey_number": 15,
+    "scoring_minute": "81"
+  },
+  {
+    "id": 9,
+    "home_team": "ARS",
+    "away_team": "LEI",
+    "against": "LEI",
+    "scorer_id": 3002,
+    "scorer_name": "Bellerin",
+    "scorer_jersey_number": 2,
+    "scoring_minute": "31"
+  },
+  {
+    "id": 10,
+    "home_team": "MCI",
+    "away_team": "SOU",
+    "against": "MCI",
+    "scorer_id": 3206,
+    "scorer_name": "Hoedt",
+    "scorer_jersey_number": 6,
+    "scoring_minute": "6"
+  },
+  {
+    "id": 11,
+    "home_team": "HUD",
+    "away_team": "FUL",
+    "against": "HUD",
+    "scorer_id": 4116,
+    "scorer_name": "Fosu-Mensah",
+    "scorer_jersey_number": 21,
+    "scoring_minute": "29"
+  },
+  {
+    "id": 12,
+    "home_team": "BOU",
+    "away_team": "ARS",
+    "against": "ARS",
+    "scorer_id": 3308,
+    "scorer_name": "Lerma",
+    "scorer_jersey_number": 20,
+    "scoring_minute": "30"
+  },
+  {
+    "id": 13,
+    "home_team": "BUR",
+    "away_team": "NEW",
+    "against": "NEW",
+    "scorer_id": 3406,
+    "scorer_name": "Mee",
+    "scorer_jersey_number": 6,
+    "scoring_minute": "4"
+  },
+  {
+    "id": 14,
+    "home_team": "MUN",
+    "away_team": "ARS",
+    "against": "ARS",
+    "scorer_id": 4415,
+    "scorer_name": "Rojo",
+    "scorer_jersey_number": 16,
+    "scoring_minute": "68"
+  },
+  {
+    "id": 15,
+    "home_team": "BOU",
+    "away_team": "LIV",
+    "against": "LIV",
+    "scorer_id": 3303,
+    "scorer_name": "Cook",
+    "scorer_jersey_number": 3,
+    "scoring_minute": "68"
+  },
+  {
+    "id": 16,
+    "home_team": "EVE",
+    "away_team": "WAT",
+    "against": "WAT",
+    "scorer_id": 3522,
+    "scorer_name": "Coleman",
+    "scorer_jersey_number": 23,
+    "scoring_minute": "63"
+  },
+  {
+    "id": 17,
+    "home_team": "SOU",
+    "away_team": "MCI",
+    "against": "MCI",
+    "scorer_id": 3215,
+    "scorer_name": "Ward-Prowse",
+    "scorer_jersey_number": 16,
+    "scoring_minute": "45"
+  },
+  {
+    "id": 18,
+    "home_team": "BUR",
+    "away_team": "FUL",
+    "against": "BUR",
+    "scorer_id": 4118,
+    "scorer_name": "Bryan",
+    "scorer_jersey_number": 23,
+    "scoring_minute": "20"
+  },
+  {
+    "id": 19,
+    "home_team": "BUR",
+    "away_team": "FUL",
+    "against": "BUR",
+    "scorer_id": 4103,
+    "scorer_name": "Odoi",
+    "scorer_jersey_number": 4,
+    "scoring_minute": "23"
+  },
+  {
+    "id": 20,
+    "home_team": "CRY",
+    "away_team": "WAT",
+    "against": "CRY",
+    "scorer_id": 4714,
+    "scorer_name": "Cathcart",
+    "scorer_jersey_number": 15,
+    "scoring_minute": "38"
+  },
+  {
+    "id": 21,
+    "home_team": "MCI",
+    "away_team": "WOL",
+    "against": "MCI",
+    "scorer_id": 4911,
+    "scorer_name": "Coady",
+    "scorer_jersey_number": 16,
+    "scoring_minute": "78"
+  },
+  {
+    "id": 22,
+    "home_team": "WOL",
+    "away_team": "LEI",
+    "against": "LEI",
+    "scorer_id": 4911,
+    "scorer_name": "Coady",
+    "scorer_jersey_number": 16,
+    "scoring_minute": "51"
+  },
+  {
+    "id": 23,
+    "home_team": "SOU",
+    "away_team": "EVE",
+    "against": "EVE",
+    "scorer_id": 3511,
+    "scorer_name": "Digne",
+    "scorer_jersey_number": 12,
+    "scoring_minute": "64"
+  },
+  {
+    "id": 24,
+    "home_team": "FUL",
+    "away_team": "TOT",
+    "against": "FUL",
+    "scorer_id": 4617,
+    "scorer_name": "Llorente",
+    "scorer_jersey_number": 18,
+    "scoring_minute": "17"
+  },
+  {
+    "id": 25,
+    "home_team": "HUD",
+    "away_team": "ARS",
+    "against": "HUD",
+    "scorer_id": 3024,
+    "scorer_name": "Kolašinac",
+    "scorer_jersey_number": 31,
+    "scoring_minute": "90 +3"
+  },
+  {
+    "id": 26,
+    "home_team": "CHE",
+    "away_team": "TOT",
+    "against": "CHE",
+    "scorer_id": 4602,
+    "scorer_name": "Trippier",
+    "scorer_jersey_number": 2,
+    "scoring_minute": "84"
+  },
+  {
+    "id": 27,
+    "home_team": "BUR",
+    "away_team": "CRY",
+    "against": "CRY",
+    "scorer_id": 3422,
+    "scorer_name": "Bardsley",
+    "scorer_jersey_number": 26,
+    "scoring_minute": "15"
+  }
+]

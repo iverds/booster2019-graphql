@@ -1,0 +1,9 @@
+type Human {
+    id: ID
+    name: String
+    friends: [Human]
+}
+
+type Query {
+    humans: [Human]
+}
