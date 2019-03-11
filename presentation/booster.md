@@ -1,4 +1,5 @@
 build-lists: true
+autoscale: true
 
 ## Getting started with GraphQL
 
@@ -6,7 +7,7 @@ build-lists: true
 
 ---
 
-![inline fit](./blank.jpg)
+![fit](./blank.jpg)
 
 ---
 
@@ -15,6 +16,8 @@ build-lists: true
 - Reflect on how you fetch data from a client
 - Try out GraphQL
 - Make you curious
+
+---
 
 # Agenda
 
@@ -162,11 +165,15 @@ build-lists: true
 
 ## Query
 
-```json
-query {
-    hello
-}
+```javascript
+fetch('graphql', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ query: '{ hello }' }),
+})
 ```
+
+---
 
 ## Response
 
@@ -234,13 +241,14 @@ server.start(() => console.log('Server is running on localhost:4000'))
 ```
 ---
 
-# Task1 - a simple query
+# Task 1 - a simple query
 
 Create a simple query that returns one or more of the built in scalars
 
-- `git clone https://...`
+- `git clone https://github.com/iverds/booster2019-graphql`
 - `npm install`
 - `npm start`
+- `src/task1`
 
 ---
 
@@ -265,11 +273,37 @@ type Query {
 }
 ```
 
-````javascript
+```javascript
 const resolvers = {
-    human = (parent, args, context, info) => {
-        console.log("Id: ", args.id);
-        ...
+    Query: {
+        human = (parent, args, context, info) => {
+            console.log("Id: ", args.id);
+        }
+    }
+}
+```
+
+---
+
+# Parameters
+
+```json 
+type HumanSearch {
+    name: String
+    hometown: String
+}
+
+type Query {
+    searchHuman(search: HumanSearch!): Human
+}
+```
+
+```javascript
+const resolvers = {
+    Query: {
+        searchHuman = (parent, args, context, info) => {
+            console.log("Search: ", args.search.name);
+        }
     }
 }
 ```
@@ -279,6 +313,8 @@ const resolvers = {
 # Task 2
 
 Create a query that return a club by name
+
+Create a query that returns a club based on a Search input type
 
 - Get data from `data.js` (Thanks to https://github.com/drraq)
 - `const { clubs } = require('./data')` 
@@ -307,10 +343,10 @@ type Human {
 ```javascript
 const resolvers = {
     Query: {
-        humans: () => {...}
+        humans: (parent, args) => {...}
     },
     Human: {
-        friends: () => {...}
+        friends: (parent, args) => {...}
     }
 }
 ```
@@ -319,7 +355,7 @@ const resolvers = {
 
 # Task 3
 
-Create a query that return that returns a list of clubs, and include the last x fixtures
+Create a query that returns a list of clubs, and include the last given number of fixtures
 
 ---
 
@@ -327,7 +363,7 @@ Create a query that return that returns a list of clubs, and include the last x 
 
 ```json
 type Mutation {
-    createHuman(first_name: String, last_name: String, age: Int)
+    createHuman(first_name: String, last_name: String, age: Int): Human
 }
 ```
 
@@ -335,7 +371,7 @@ type Mutation {
 const resolvers = {
     Mutation: {
         createHuman: (parent, args) => {
-            humans.push(new Human(args.first_name, args.last_name, args.age))
+            //Create human and return it
         }
     }
 }
@@ -391,6 +427,69 @@ Create a subscription that subscribes to new goals
 
 ---
 
+# GraphQL bottlenecks
+
+```json
+query {
+    clubs {
+        players {
+            name
+        }
+
+        fixtures {
+            result
+            scorers {
+                name
+            }
+        }
+    }
+}
+```
+
+- N+1 SQL (or other data) queries
+- Multiple queries for same resource
+
+---
+
+# Dataloader to the rescue
+
+- Batches up multiple requests, and execute as one request
+- Caches data during the lifetime of a request
+
+```javascript
+const getPlayersByClub = clubIds => {
+    return Promise.resolve(clubIds.map(k => k + 1))
+}
+```
+
+- The Array of values returned must be the same length as the Array of keys.
+- Each index in the Array of values must correspond to the same index in the Array of keys.
+
+
+---
+
+# Example
+
+```javascript
+
+var DataLoader = require('dataloader')
+var playerLoader = new DataLoader(getPlayersByClub);
+
+const resolver = {
+    Club: {
+        players = club => playerLoader.load(club.id)
+    }
+}
+```
+
+---
+
+# Task 6
+
+Change calls for nested resources to use dataloader
+
+---
+
 #Resources
 
 https://github.com/iverds/booster2019-graphql
@@ -400,9 +499,8 @@ https://github.com/iverds/booster2019-graphql
 # TODO
 
 - Fragments
-- Annotations (@include)
-- DataLoader
-- Clients? Relay/Apollo
+- Annotations (@include, @deprecated)
+- Clients (Relay/Apollo)
 
 
 ---
