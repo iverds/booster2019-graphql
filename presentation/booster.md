@@ -139,7 +139,7 @@ autoscale: true
 
 ---
 
-#Demo
+# Demo
 
 ---
 
@@ -160,21 +160,18 @@ autoscale: true
 ---
 
 
-## Query
+# Query and response
 
+[.code-highlight: none]
+[.code-highlight: 1-5]
+[.code-highlight: 7-11]
 ```javascript
 fetch('graphql', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ query: '{ hello }' }),
 })
-```
 
----
-
-## Response
-
-```json
 {
     "data": {
         "hello": "Hello World!"
@@ -338,7 +335,7 @@ const resolvers = {
 
 ---
 
-# Task 2
+# Task 2 - Parameter queries
 
 1. Create a query that return a club by name
 2. Create a query that returns a club based on a Search input type
@@ -384,7 +381,7 @@ const resolvers = {
 
 ---
 
-# Task 3
+# Task 3 - Nested queries
 
 1. Create a query that returns a list of clubs, and include the last given number of fixtures
 2. Include all goal scorers for a fixture
@@ -397,7 +394,7 @@ const resolvers = {
 [.code-highlight: 1-3]
 [.code-highlight: 5-11]
 [.code-highlight: all]
-```javscript
+```javascript
 type Mutation {
     createHuman(first_name: String, last_name: String, age: Int): Human
 }
@@ -495,6 +492,9 @@ query {
 
 - Batches up multiple requests, and execute as one request
 - Caches data during the lifetime of a request
+- Based on one function that take an array of keys
+
+---
 
 ```javascript
 const getPlayersByClub = clubIds => {
@@ -536,7 +536,7 @@ const resolver = {
 
 ---
 
-#Resources
+# Resources
 
 - https://github.com/iverds/booster2019-graphql
 - https://graphql.org/
@@ -547,4 +547,4 @@ const resolver = {
 
 ---
 
-#Thank you
+# Thank you
