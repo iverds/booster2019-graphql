@@ -1,3 +1,38 @@
+type Goal {
+    goalScorerName: String
+}
+
+type Fixture {
+    id: ID!
+    venue: String
+    attendance: Int
+    postponed: Boolean
+    goals: [Goal!]!
+}
+
+type Club {
+    id: ID!
+    name: String
+    shortName: String
+    clubCode: String
+    fixtures(last: Int): [Fixture]
+}
+
+input SearchClub {
+    name: String
+    clubCode: String
+}
+
 type Query {
-    hello: String
+    clubs: [Club!]!
+    club(name: String!): Club
+    searchClub(search: SearchClub): Club
+}
+
+type Mutation {
+    createGoal(home_team: String, away_team: String, goal_scorer_name: String): Goal
+}
+
+type Subscription {
+    goal: Goal
 }

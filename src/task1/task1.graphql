@@ -1,3 +1,7 @@
 type Query {
-    hello: String
+    id: ID
+    hello: String!
+    number: Int
+    float: Float
+    isTrue: Boolean
 }
