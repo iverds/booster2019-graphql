@@ -224,6 +224,17 @@ const resolvers = {
 
 ---
 
+# Resolver
+```javascript
+id: (parent, args, context, info) => 1,
+```
+- `parent`: The parent object (often not used on root query)
+- `args`: Input arguments to the graphql query/mutation
+- `context`: Request-spesific information like current user and database connection
+- `info`:  Field-specific information
+
+---
+
 # Complete example
 
 [.code-highlight: none]
@@ -342,6 +353,7 @@ const resolvers = {
 
 - Get data from `data.js` (Thanks to https://github.com/drraq)
 - `const { clubs } = require('./data')` 
+- Remember to change reference in `server.js`
 
 ---
 
@@ -521,12 +533,6 @@ const resolver = {
     }
 }
 ```
-
----
-
-# Context
-
-
 
 ---
 
