@@ -442,7 +442,7 @@ const resolvers = {
     Mutation: {
         createHuman: (parent, args) => {
             // Create human
-            pubsub.publish('CHAT_CHANNEL', { humanBorn: {} })
+            pubsub.publish(CHAT_CHANNEL, { humanBorn: {} })
         }
     },
     Subscription: {
