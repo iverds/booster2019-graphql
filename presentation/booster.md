@@ -33,19 +33,19 @@ autoscale: true
 
 ---
 
-#When we fetched HTML
+# When we fetched HTML
 
 
 ![inline fit](./img1-1.png)
 
 ---
-#Single Page Applications (SPA)
+# Single Page Applications (SPA)
 
 ![inline fit](./img1-2.png)
 
 ---
 
-#Challenges with REST
+# Challenges with REST
 
 - Hard to do correct (for me at least)
 - Often ends up with REST-ish endpoints
@@ -58,6 +58,7 @@ autoscale: true
 - Clubs
 - Players
 - Fixtures
+- Goals
 
 ---
 
@@ -115,10 +116,6 @@ autoscale: true
 - `/GetClubWithPlayersAndFixturesById`
 - `/GetClubsWithFixtures`
 - `/GetClubsWithLastMatch`
-
----
-
-# Example here?
 
 ---
 
@@ -189,7 +186,14 @@ fetch('graphql', {
 
 # Schema
 
-```json
+[.code-highlight: none]
+[.code-highlight: 2]
+[.code-highlight: 3]
+[.code-highlight: 4]
+[.code-highlight: 5]
+[.code-highlight: 6]
+
+```javascript
 type Query {
     id: ID
     hello: String!
@@ -203,8 +207,13 @@ type Query {
 
 # Resolver
 
+[.code-highlight: none]
+[.code-highlight: 3]
+[.code-highlight: 4]
+[.code-highlight: 5]
+[.code-highlight: 6]
+[.code-highlight: 7]
 ```javascript
-
 const resolvers = {
     Query: {
         id: (parent, args, context, info) => 1,
@@ -217,8 +226,15 @@ const resolvers = {
 ```
 
 ---
+
 # Complete example
 
+[.code-highlight: none]
+[.code-highlight: 1]
+[.code-highlight: 3-6]
+[.code-highlight: 8-12]
+[.code-highlight: 14-15]
+[.code-highlight: all]
 ```javascript
 
 const { GraphQLServer } = require('graphql-yoga')
@@ -226,8 +242,7 @@ const { GraphQLServer } = require('graphql-yoga')
 const typeDefs = `
 type Query {
   hello: String!
-}
-`
+}`
 
 const resolvers = {
   Query: {
@@ -254,7 +269,14 @@ Create a simple query that returns one or more of the built in scalars
 
 # Custom types
 
-```json
+[.code-highlight: none]
+[.code-highlight: 1]
+[.code-highlight: 2]
+[.code-highlight: 3]
+[.code-highlight: 4]
+[.code-highlight: 5]
+[.code-highlight: all]
+```javascript
 type Human {
     id: ID!
     first_name: String!
@@ -267,13 +289,16 @@ type Human {
 
 # Parameters
 
-```json 
+[.code-highlight: none]
+[.code-highlight: 1-3]
+[.code-highlight: 5-11]
+[.code-highlight: all]
+
+```javascript 
 type Query {
     human(id: ID!): Human
 }
-```
 
-```javascript
 const resolvers = {
     Query: {
         human = (parent, args, context, info) => {
@@ -287,8 +312,13 @@ const resolvers = {
 
 # Parameters
 
-```json 
-type HumanSearch {
+[.code-highlight: none]
+[.code-highlight: 1-4]
+[.code-highlight: 6-8]
+[.code-highlight: 10-16]
+[.code-highlight: all]
+```javascript
+input HumanSearch {
     name: String
     hometown: String
 }
@@ -296,9 +326,7 @@ type HumanSearch {
 type Query {
     searchHuman(search: HumanSearch!): Human
 }
-```
 
-```javascript
 const resolvers = {
     Query: {
         searchHuman = (parent, args, context, info) => {
@@ -312,9 +340,8 @@ const resolvers = {
 
 # Task 2
 
-Create a query that return a club by name
-
-Create a query that returns a club based on a Search input type
+1. Create a query that return a club by name
+2. Create a query that returns a club based on a Search input type
 
 - Get data from `data.js` (Thanks to https://github.com/drraq)
 - `const { clubs } = require('./data')` 
@@ -333,14 +360,18 @@ type Query {
 
 # Nested resources
 
-```json
+[.code-highlight: none]
+[.code-highlight: 1-5]
+[.code-highlight: 8-10]
+[.code-highlight: 11-13]
+[.code-highlight: all]
+```javascript
 type Human {
-    ...,
+    name: String
+    hometown: String
     friends: [Human]
 }
-```
 
-```javascript
 const resolvers = {
     Query: {
         humans: (parent, args) => {...}
@@ -355,19 +386,22 @@ const resolvers = {
 
 # Task 3
 
-Create a query that returns a list of clubs, and include the last given number of fixtures
+1. Create a query that returns a list of clubs, and include the last given number of fixtures
+2. Include all goal scorers for a fixture
 
 ---
 
 # Mutations
 
-```json
+[.code-highlight: none]
+[.code-highlight: 1-3]
+[.code-highlight: 5-11]
+[.code-highlight: all]
+```javscript
 type Mutation {
     createHuman(first_name: String, last_name: String, age: Int): Human
 }
-```
 
-```javascript
 const resolvers = {
     Mutation: {
         createHuman: (parent, args) => {
@@ -379,9 +413,9 @@ const resolvers = {
 
 ---
 
-# Task 4
+# Task 4 - Mutations
 
-Create a mutation that creates a goal for a fixture and returns it
+1. Create a mutation that creates a goal for a fixture and returns it
 
 ---
 
@@ -395,6 +429,14 @@ type Subscription {
 
 ---
 
+# Subscriptions
+
+[.code-highlight: none]
+[.code-highlight: 1-2]
+[.code-highlight: 5-10]
+[.code-highlight: 11-15]
+[.code-highlight: 17-18]
+[.code-highlight: all]
 ```javascript
 const { GraphQLServer, PubSub } = require('graphql-yoga')
 const CHAT_CHANNEL = 'CHANNEL';
@@ -402,15 +444,13 @@ const CHAT_CHANNEL = 'CHANNEL';
 const resolvers = {
     Mutation: {
         createHuman: (parent, args) => {
-            ...
-            pubsub.publish('CHAT_CHANNEL', { humanBorn: human })
+            // Create human
+            pubsub.publish('CHAT_CHANNEL', { humanBorn: {} })
         }
     },
     Subscription: {
         messageSent: {
-            subscribe: (root, args, { pubsub }) => {
-                return pubsub.asyncIterator(CHAT_CHANNEL)
-            }
+            subscribe: (root, args, { pubsub }) => pubsub.asyncIterator(CHAT_CHANNEL)
         }
     }
 }
@@ -451,7 +491,7 @@ query {
 
 ---
 
-# Dataloader to the rescue
+# Dataloader
 
 - Batches up multiple requests, and execute as one request
 - Caches data during the lifetime of a request
@@ -468,7 +508,7 @@ const getPlayersByClub = clubIds => {
 
 ---
 
-# Example
+# Dataloader
 
 ```javascript
 
@@ -484,23 +524,25 @@ const resolver = {
 
 ---
 
-# Task 6
+# Context
 
-Change calls for nested resources to use dataloader
+
+
+---
+
+# Task 6 - Dataloader
+
+1. Change calls for nested resources to use dataloader
 
 ---
 
 #Resources
 
-https://github.com/iverds/booster2019-graphql
-
----
-
-# TODO
-
-- Fragments
-- Annotations (@include, @deprecated)
-- Clients (Relay/Apollo)
+- https://github.com/iverds/booster2019-graphql
+- https://graphql.org/
+- https://www.howtographql.com/
+- https://github.com/prisma/graphql-yoga
+- https://github.com/facebook/dataloader
 
 
 ---
