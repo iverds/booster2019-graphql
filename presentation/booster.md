@@ -562,7 +562,7 @@ var DataLoader = require('dataloader')
 
 const resolver = {
     Human: {
-        friends = (parent, args, context) => context.friendsLoder.load(club.id)
+        friends = (parent, args, context) => context.friendsLoder.load(parent.id)
     }
 }
 
@@ -626,8 +626,8 @@ const resolvers = {
     Human: {
         friends: (parent, args, context) => {
             const currentUser = getUser(context.user_id);
-            return getFriendsForUser(parent.user_id)
-                .filter(user => currentUser.friends.some(f => f.user_id === user.user_id))
+            return getFriendsForUser(parent.id)
+                .filter(user => currentUser.friends.some(f => f.id === user.id))
         }
     }
 }
@@ -637,12 +637,13 @@ const resolvers = {
 
 # Task 7 - Authorization
 
-1. Create a method `getUser` that return a user, which have a list of club-ids
+1. Create a method `getUser` that return a user, which have a list of club ids
 2. Set a static user id on the context
 3. Change the club resolver to only return clubs the user have access to
 
 ```javascript
 {
+    id: 1,
     name: 'Trener Trenersen',
     club_ids: [1, 2, 3]
 }
