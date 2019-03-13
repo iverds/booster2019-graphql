@@ -1,1 +1,1 @@
-require('./task1/task1')
+require('./examples/example')
