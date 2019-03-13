@@ -7,5 +7,5 @@ const resolvers = {
   }
 }
 
-const server = new GraphQLServer({ typeDefs: './src/task1/task1.graphql', resolvers })
+const server = new GraphQLServer({ typeDefs: './src/task7/task7.graphql', resolvers })
 server.start(() => console.log('Server is running on localhost:4000'))

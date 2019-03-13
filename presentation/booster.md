@@ -1,6 +1,13 @@
 build-lists: true
 autoscale: true
 
+
+- `git clone https://github.com/iverds/booster2019-graphql`
+- `npm install`
+- `npm start`
+
+---
+
 ## Getting started with GraphQL
 
 ### Iver Skjervum-Karlsen
@@ -35,7 +42,6 @@ autoscale: true
 
 # When we fetched HTML
 
-
 ![inline fit](./img1-1.png)
 
 ---
@@ -47,7 +53,7 @@ autoscale: true
 
 # Challenges with REST
 
-- Hard to do correct (for me at least)
+- Hard to do correctly (for me at least)
 - Often ends up with REST-ish endpoints
 - Underfetching and Overfetching
 
@@ -64,7 +70,7 @@ autoscale: true
 
 # Two pages:
 
-- One with one club, list of players and last 5 fixtures
+- One with one club, list of players and last five fixtures
 - One with all the clubs, and their last match
 
 ---
@@ -120,7 +126,7 @@ autoscale: true
 ---
 
 ## Underfetching
-- And endpoint doesn't provide enough information
+- An endpoint doesn't provide enough information
 - N+1 problem
 
 ## Overfetching
@@ -132,9 +138,11 @@ autoscale: true
 
 ---
 
-- It let's us specify the the data we need in a query
-- Easy to write correct
-- Get schema and typing
+# GraphQL. What is it?
+
+- It lets us specify the the data we need in a query
+- Easy to write correctly
+- Schema and typing
 - No silver bullet
 
 ---
@@ -154,8 +162,8 @@ autoscale: true
 # Operations
 
 - `query`: Query for data
-- `mutation`: Creating and updating data, and return data
-- `subscription`: Subscribe on data changes (like websockets)
+- `mutation`: Create or update and then return some data
+- `subscription`: Subscribe on data changes
 
 ---
 
@@ -225,6 +233,7 @@ const resolvers = {
 ---
 
 # Resolver
+
 ```javascript
 id: (parent, args, context, info) => 1,
 ```
@@ -264,14 +273,19 @@ server.start(() => console.log('Server is running on localhost:4000'))
 ```
 ---
 
-# Task 1 - a simple query
+# Task 1 - A simple query
 
 Create a simple query that returns one or more of the built in scalars
 
 - `git clone https://github.com/iverds/booster2019-graphql`
 - `npm install`
 - `npm start`
-- `src/task1`
+- `src/task1/task1.graphql`: Schema
+- `src/task1/task1.js`: Resolver
+
+---
+
+# Custom types
 
 ---
 
@@ -292,6 +306,10 @@ type Human {
     age: Int!
 }
 ```
+
+---
+
+# Parameters
 
 ---
 
@@ -346,7 +364,7 @@ const resolvers = {
 
 ---
 
-# Task 2 - Parameter queries
+# Task 2 - Parameterized queries
 
 1. Create a query that return a club by name
 2. Create a query that returns a club based on a Search input type
@@ -354,6 +372,10 @@ const resolvers = {
 - Get data from `data.js` (Thanks to https://github.com/drraq)
 - `const { clubs } = require('./data')` 
 - Remember to change reference in `server.js`
+
+---
+
+# Lists
 
 ---
 
@@ -367,7 +389,11 @@ type Query {
 
 ---
 
-# Nested resources
+# Nested queries
+
+---
+
+# Nested queries
 
 [.code-highlight: none]
 [.code-highlight: 1-5]
@@ -397,6 +423,11 @@ const resolvers = {
 
 1. Create a query that returns a list of clubs, and include the last given number of fixtures
 2. Include all goal scorers for a fixture
+3. Include all players for a club
+
+---
+
+# Mutations
 
 ---
 
@@ -425,6 +456,10 @@ const resolvers = {
 # Task 4 - Mutations
 
 1. Create a mutation that creates a goal for a fixture and returns it
+
+---
+
+# Subscriptions
 
 ---
 
@@ -478,18 +513,16 @@ Create a subscription that subscribes to new goals
 
 # GraphQL bottlenecks
 
-```json
-query {
-    clubs {
-        players {
-            name
-        }
+---
 
-        fixtures {
-            result
-            scorers {
-                name
-            }
+# GraphQL bottlenecks
+
+```javascript
+query {
+    humans {
+        name
+        friends {
+            name
         }
     }
 }
@@ -505,33 +538,43 @@ query {
 - Batches up multiple requests, and execute as one request
 - Caches data during the lifetime of a request
 - Based on one function that take an array of keys
+- The Array of values returned must be the same length as the Array of keys.
+- Each index in the Array of values must correspond to the same index in the Array of keys.
 
 ---
 
 ```javascript
-const getPlayersByClub = clubIds => {
-    return Promise.resolve(clubIds.map(k => k + 1))
+const getFriendsByUserIds = userIds => {
+    return Promise.resolve(userIds.map(k => k + 1))
 }
 ```
-
-- The Array of values returned must be the same length as the Array of keys.
-- Each index in the Array of values must correspond to the same index in the Array of keys.
-
 
 ---
 
 # Dataloader
 
+[.code-highlight: none]
+[.code-highlight: 9-17]
+[.code-highlight: 10-16]
+[.code-highlight: 4-6]
 ```javascript
-
 var DataLoader = require('dataloader')
-var playerLoader = new DataLoader(getPlayersByClub);
 
 const resolver = {
-    Club: {
-        players = club => playerLoader.load(club.id)
+    Human: {
+        friends = (parent, args, context) => context.friendsLoder.load(club.id)
     }
 }
+
+const server = new GraphQLServer({ typeDefs: './src/task6/task6.graphql', resolvers,
+    context: () => { 
+        return { 
+            loaders: {
+                friendsLoder: new DataLoader(getFriendsByUserIds);
+            }
+        } 
+    }
+})
 ```
 
 ---
@@ -539,6 +582,71 @@ const resolver = {
 # Task 6 - Dataloader
 
 1. Change calls for nested resources to use dataloader
+
+---
+
+# Pitfalls
+
+---
+# Endless quieries
+
+```javascript
+query {
+    humans {
+        name
+        friends {
+            name
+            friends {
+                name
+                friends { name friends { friends { friends { }}}}
+            }
+        }
+    }
+}
+```
+
+---
+
+# Authorization
+
+- Common vulnerability in graphql-endpoints
+- The `context` parameter is a perfect place for resolving user information
+- Think of authorization in every resolver
+
+---
+
+# Authorization
+
+[.code-highlight: none]
+[.code-highlight: 3-7]
+[.code-highlight: 4]
+[.code-highlight: 5-6]
+```javascript
+const resolvers = {
+    Human: {
+        friends: (parent, args, context) => {
+            const currentUser = getUser(context.user_id);
+            return getFriendsForUser(parent.user_id)
+                .filter(user => currentUser.friends.some(f => f.user_id === user.user_id))
+        }
+    }
+}
+```
+
+---
+
+# Task 7 - Authorization
+
+1. Create a method `getUser` that return a user, which have a list of club-ids
+2. Set a static user id on the context
+3. Change the club resolver to only return clubs the user have access to
+
+```javascript
+{
+    name: 'Trener Trenersen',
+    club_ids: [1, 2, 3]
+}
+```
 
 ---
 

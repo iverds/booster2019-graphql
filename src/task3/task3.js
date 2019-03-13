@@ -1,9 +1,5 @@
 const { GraphQLServer } = require('graphql-yoga')
 
-
-// Create your types here
-const typeDefs = ``
-
 // Create your resolvers here
 const resolvers = {
   Query: {
@@ -11,5 +7,5 @@ const resolvers = {
   }
 }
 
-const server = new GraphQLServer({ typeDefs, resolvers })
+const server = new GraphQLServer({ typeDefs: './src/task3/task3.graphql', resolvers })
 server.start(() => console.log('Server is running on localhost:4000'))
