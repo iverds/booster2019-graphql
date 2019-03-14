@@ -3,7 +3,10 @@ const { GraphQLServer } = require('graphql-yoga')
 // Create your resolvers here
 const resolvers = {
   Query: {
-    hello: () => 'World'
+    hello: () => 'World',
+    world: () => 'Hello',
+    number: () => null,
+    float: () => 1.1
   }
 }
 

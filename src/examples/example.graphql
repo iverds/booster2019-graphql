@@ -1,3 +1,6 @@
 type Query {
     hello: String
+    world: String
+    number: Int!
+    float: Float
 }

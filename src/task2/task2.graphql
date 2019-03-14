@@ -1,3 +1,10 @@
 type Query {
-    hello: String
+    club(name: String!): Club
+}
+
+type Club {
+    id: ID
+    name: String
+    stadium: String
+    short: String
 }

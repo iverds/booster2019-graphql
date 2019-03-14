@@ -277,11 +277,11 @@ server.start(() => console.log('Server is running on localhost:4000'))
 
 # Task 1 - A simple query
 
-Create a simple query that returns one or more of the built in scalars
+Create a simple query that returns one or more of the built in scalars (like ID, String, Int, Float or Boolean)
 
 - `git clone https://github.com/iverds/booster2019-graphql`
 - `npm install`
-- `npm start`
+- `npm start` - `localhost:4000`
 - `src/task1/task1.graphql`: Schema
 - `src/task1/task1.js`: Resolver
 
@@ -329,7 +329,7 @@ type Query {
 
 const resolvers = {
     Query: {
-        human = (parent, args, context, info) => {
+        human: (parent, args, context, info) => {
             console.log("Id: ", args.id);
         }
     }
@@ -357,7 +357,7 @@ type Query {
 
 const resolvers = {
     Query: {
-        searchHuman = (parent, args, context, info) => {
+        searchHuman: (parent, args, context, info) => {
             console.log("Search: ", args.search.first_name);
         }
     }
@@ -373,9 +373,18 @@ const resolvers = {
 
 - Get data from `data.js` (Thanks to https://github.com/drraq)
 - `const { clubs } = require('./data')` 
-- Remember to change reference in `server.js`
+- Remember to change reference in `server.js` to 
+`require('./task2/task2')`
 
 ---
+## package.json:
+## "start": "nodemon -e graphql,js ./src/server.js",
+
+### https://github.com/iverds/booster2019-graphql/blob/master/presentation/booster.md
+
+
+---
+
 
 # Lists
 
@@ -570,7 +579,7 @@ var DataLoader = require('dataloader')
 
 const resolver = {
     Human: {
-        friends = (parent, args, context) => context.friendsLoder.load(parent.id)
+        friends: (parent, args, context) => context.friendsLoder.load(parent.id)
     }
 }
 
