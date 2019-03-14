@@ -398,9 +398,9 @@ type Query {
 # Nested queries
 
 [.code-highlight: none]
-[.code-highlight: 1-5]
-[.code-highlight: 8-10]
+[.code-highlight: 6]
 [.code-highlight: 11-13]
+[.code-highlight: 15-19]
 [.code-highlight: all]
 ```javascript
 type Human {
@@ -487,7 +487,7 @@ type Subscription {
 [.code-highlight: 1-2]
 [.code-highlight: 5-10]
 [.code-highlight: 11-15]
-[.code-highlight: 17-18]
+[.code-highlight: 18-19]
 [.code-highlight: all]
 ```javascript
 const { GraphQLServer, PubSub } = require('graphql-yoga')
@@ -596,7 +596,7 @@ const server = new GraphQLServer({ typeDefs: './src/task6/task6.graphql', resolv
 # Pitfalls
 
 ---
-# Endless quieries
+# Endless queries
 
 ```javascript
 query {
