@@ -665,6 +665,7 @@ const resolvers = {
 
 - Relay Modern
 - Apollo Client
+- https://github.com/chentsulin/awesome-graphql
 
 ---
 
@@ -675,6 +676,7 @@ const resolvers = {
 - https://www.howtographql.com/
 - https://github.com/prisma/graphql-yoga
 - https://github.com/facebook/dataloader
+- https://github.com/chentsulin/awesome-graphql
 
 
 ---
