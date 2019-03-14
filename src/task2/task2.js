@@ -1,17 +1,20 @@
 const { GraphQLServer } = require('graphql-yoga')
-const { clubs } = require('../data');
+const { clubs, season_fixtures } = require('../data');
 
 // Create your resolvers here
 const resolvers = {
-  Query: {
-    club: (_, args) => {
-      return clubs.find(club => club.name === args.name)
-      // return {id: 1, name: "Arsenal", stadium: "?"}
+  Club: {
+    fixtures: (club, args) => {
+      return season_fixtures
+        .reduce((acc, cur) => [...acc, ...cur.fixtures], [])
+        .filter(fixture => fixture.home_team_code === club.club_code || fixture.away_team_code === club.club_code)
+        .reverse()
+        .slice(0, args.last)
     }
   },
-    Club: {
-      short: (parent) => parent.short_name
-    }
+  Query: {
+    clubs: (_, args) => clubs
+  }
 }
 
 const server = new GraphQLServer({ typeDefs: './src/task2/task2.graphql', resolvers })

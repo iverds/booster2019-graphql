@@ -438,9 +438,11 @@ const resolvers = {
 
 # Task 3 - Nested queries
 
-1. Create a query that returns a list of clubs, and include the last given number of fixtures
-2. Include all goal scorers for a fixture
-3. Include all players for a club
+1. Create a query that returns a list of clubs
+2. Include all fixtures of a club
+3. Add a parameter to include the last n fixtures of a club
+4. Include all goal scorers for a fixture
+5. Include all players for a club
 
 ---
 
@@ -463,6 +465,7 @@ const resolvers = {
     Mutation: {
         createHuman: (parent, args) => {
             //Create human and return it
+	    humans.push(args)
         }
     }
 }
@@ -470,9 +473,22 @@ const resolvers = {
 
 ---
 
+```json
+mutation{
+ createHuman(first_name: "Iver", last_name: "S-K", age: 32) {
+  first_name
+  last_name
+  age
+}
+}
+
+```
+
+---
+
 # Task 4 - Mutations
 
-1. Create a mutation that creates a goal for a fixture and returns it
+1. Create a mutation that creates a club and returns it
 
 ---
 

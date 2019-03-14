@@ -1,10 +1,15 @@
 type Query {
-    club(name: String!): Club
+    clubs: [Club]
 }
 
 type Club {
     id: ID
     name: String
     stadium: String
-    short: String
+    fixtures(last: Int): [Fixture]
+}
+
+type Fixture {
+    id: ID
+    venue: String
 }
