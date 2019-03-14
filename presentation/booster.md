@@ -71,7 +71,7 @@ autoscale: true
 # Two pages:
 
 - One with one club, list of players and last five fixtures
-- One with all the clubs, and their last match
+- One with all the clubs, and their last fixture including goal scorer names
 
 ---
 
@@ -81,6 +81,8 @@ autoscale: true
 - `/clubs/{id}`
 - `/clubs/{id}/players`
 - `/clubs/{id}/season_fixtures`
+- `/season_fixtures/{id}/goals`
+- `/goals/{id}/player`
 
 ---
 
@@ -119,9 +121,9 @@ autoscale: true
 
 # REST(ish)
 
-- `/GetClubWithPlayersAndFixturesById`
+- `/GetClubWithPlayersAndLastFiveFixturesById`
 - `/GetClubsWithFixtures`
-- `/GetClubsWithLastMatch`
+- `/GetClubsWithLastFixtureAndGoalsForThat`
 
 ---
 
